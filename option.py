@@ -44,31 +44,31 @@ def save_yaml(path, file_dict):
 
 def opt_format(opt):
     opt.root = os.getcwd()
-    opt.config = r'{}\config\{}.yaml'.format(opt.root, opt.model_task)
+    opt.config = r'{}/config/{}.yaml'.format(opt.root, opt.model_task)
     opt.config = load_yaml(opt.config)
 
     proper_time = str(datetime.now()).split('.')[0].replace(':', '-')
 
     opt.config['exp_name'] = '{}_{}'.format(opt.task, opt.config['exp_name'])
 
-    opt.experiments = r'{}\experiments\{}'.format(opt.root, '{} {}'.format(proper_time, opt.config['exp_name']))
+    opt.experiments = r'{}/experiments/{}'.format(opt.root, '{} {}'.format(proper_time, opt.config['exp_name']))
     if not os.path.exists(opt.experiments):
         os.mkdir(opt.experiments)
 
-    config_path = r'{}\config.yaml'.format(opt.experiments)
+    config_path = r'{}/config.yaml'.format(opt.experiments)
     save_yaml(config_path, opt.config)
 
     if opt.task == 'demo' or (opt.task == 'test' and opt.config['test']['save'] != False):
         opt.save_image = True
-        opt.save_image_dir = r'{}\{}'.format(opt.experiments, 'images')
+        opt.save_image_dir = r'{}/{}'.format(opt.experiments, 'images')
         if not os.path.exists(opt.save_image_dir):
             os.mkdir(opt.save_image_dir)
 
-    opt.log_path = r'{}\logger.log'.format(opt.experiments)
+    opt.log_path = r'{}/logger.log'.format(opt.experiments)
 
     if opt.task == 'train':
         opt.save_model = True
-        opt.save_model_dir = r'{}\{}'.format(opt.experiments, 'models')
+        opt.save_model_dir = r'{}/{}'.format(opt.experiments, 'models')
         if not os.path.exists(opt.save_model_dir):
             os.mkdir(opt.save_model_dir)
 
