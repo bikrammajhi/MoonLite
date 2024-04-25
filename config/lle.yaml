@@ -16,13 +16,13 @@ train:
   save_slim: true # re-parameterize the model and save the re-parameterized model
 
 test:
-  test_inp: D:\Data\DataSet\LOL\eval15\low # <path to the directory of raw input images for testing>
-  test_gt: D:\Data\DataSet\LOL\eval15\high # <path to the directory of rgb ground truth images for testing>
+  test_inp: /kaggle/input/lol-dataset/lol_dataset/eval15/low # <path to the directory of raw input images for testing>
+  test_gt: /kaggle/input/lol-dataset/lol_dataset/eval15/high # <path to the directory of rgb ground truth images for testing>
   num_workers: 0
   save: false
 
 demo:
-  demo_inp: D:\Data\DataSet\LOL\eval15\low # <path to the directory of raw input images for demonstration>
+  demo_inp: /kaggle/input/lol-dataset/lol_dataset/our485/low # <path to the directory of raw input images for demonstration>
   num_workers: 0
 
 model:
