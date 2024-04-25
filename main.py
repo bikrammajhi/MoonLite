@@ -40,7 +40,7 @@ def train(opt, logger):
                 loss_li.append(loss.item())
 
             logger.info('epoch: {}, train_loss: {}'.format(epo+1, sum(loss_li)/len(loss_li)))
-            torch.save(net.state_dict(), r'{}\model_pre.pkl'.format(opt.save_model_dir))
+            torch.save(net.state_dict(), r'{}/model_pre.pkl'.format(opt.save_model_dir))
         logger.info('warming-up phase done')
 
     # Phase Training
@@ -74,7 +74,7 @@ def train(opt, logger):
         mean_psnr = sum(test_psnr)/len(test_psnr)
 
         if (epo+1) % int(opt.config['train']['save_every']) == 0:
-            torch.save(net.state_dict(), r'{}\model_{}.pkl'.format(opt.save_model_dir, epo+1))
+            torch.save(net.state_dict(), r'{}/model_{}.pkl'.format(opt.save_model_dir, epo+1))
 
         logger.info('epoch: {}, training loss: {}, validation psnr: {}'.format(
             epo+1, sum(loss_li) / len(loss_li), sum(test_psnr) / len(test_psnr)
@@ -82,10 +82,10 @@ def train(opt, logger):
 
         if mean_psnr > best_psnr:
             best_psnr = mean_psnr
-            torch.save(net.state_dict(), r'{}\model_best.pkl'.format(opt.save_model_dir))
+            torch.save(net.state_dict(), r'{}/model_best.pkl'.format(opt.save_model_dir))
             if opt.config['train']['save_slim']:
                 net_slim = net.slim().to(opt.device)
-                torch.save(net_slim.state_dict(), r'{}\model_best_slim.pkl'.format(opt.save_model_dir))
+                torch.save(net_slim.state_dict(), r'{}/model_best_slim.pkl'.format(opt.save_model_dir))
                 logger.info('best model saved and re-parameterized in epoch {}'.format(epo+1))
             else:
                 logger.info('best model saved in epoch in epoch {}'.format(epo+1))
@@ -108,7 +108,7 @@ def test(opt, logger):
 
         if opt.config['test']['save']:
             out_img = (out.clip(0, 1)[0] * 255).permute([1, 2, 0]).cpu().numpy().astype(np.uint8)[..., ::-1]
-            cv2.imwrite(r'{}\{}.png'.format(opt.save_image_dir, img_name[0]), out_img)
+            cv2.imwrite(r'{}/{}.png'.format(opt.save_image_dir, img_name[0]), out_img)
 
         psnr_list.append(psnr.item())
         logger.info('image name: {}, test psnr: {}'.format(img_name[0], psnr))
@@ -126,7 +126,7 @@ def demo(opt, logger):
         with torch.no_grad():
             out = net(img_inp)
         out_img = (out.clip(0, 1)[0] * 255).permute([1, 2, 0]).cpu().numpy().astype(np.uint8)[..., ::-1]
-        cv2.imwrite(r'{}\{}.png'.format(opt.save_image_dir, img_name[0]), out_img)
+        cv2.imwrite(r'{}/{}.png'.format(opt.save_image_dir, img_name[0]), out_img)
         logger.info('image name: {} output generated'.format(img_name[0]))
     logger.info('demonstration done')
 
