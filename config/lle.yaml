@@ -8,7 +8,7 @@ train:
   train_gt: /kaggle/input/lol-dataset/lol_dataset/our485/high # <path to the directory of high-light ground truth images for training>
   valid_inp: /kaggle/input/lol-dataset/lol_dataset/eval15/low # <path to the directory of low-light input images for validation>
   valid_gt: /kaggle/input/lol-dataset/lol_dataset/eval15/high # <path to the directory of high-light ground truth images for validation>
-  batch_size: 8
+  batch_size: 4
   epoch: 50
   lr: 1e-3
   num_workers: 0
