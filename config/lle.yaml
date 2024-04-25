@@ -4,10 +4,10 @@ train:
   warmup: true
   warmup_epoch: 10
   lr_warmup: 1e-6
-  train_inp: D:\Data\DataSet\LOL\our485\low # <path to the directory of low-light input images for training>
-  train_gt: D:\Data\DataSet\LOL\our485\high # <path to the directory of high-light ground truth images for training>
-  valid_inp: D:\Data\DataSet\LOL\eval15\low # <path to the directory of low-light input images for validation>
-  valid_gt: D:\Data\DataSet\LOL\eval15\high # <path to the directory of high-light ground truth images for validation>
+  train_inp: /kaggle/input/lol-dataset/lol_dataset/our485/low # <path to the directory of low-light input images for training>
+  train_gt: /kaggle/input/lol-dataset/lol_dataset/our485/high # <path to the directory of high-light ground truth images for training>
+  valid_inp: /kaggle/input/lol-dataset/lol_dataset/eval15/low # <path to the directory of low-light input images for validation>
+  valid_gt: /kaggle/input/lol-dataset/lol_dataset/eval15/high # <path to the directory of high-light ground truth images for validation>
   batch_size: 4
   epoch: 200
   lr: 1e-3
