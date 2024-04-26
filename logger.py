@@ -23,7 +23,7 @@ class Logger:
         self.configure()
 
     def configure(self):
-        log_format = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
+        log_format = logging.Formatter('%(levelname)s: %(message)s') #%(asctime)s 
 
         stream_handler = logging.StreamHandler()
         stream_handler.setLevel(self.stream_level)
