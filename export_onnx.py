@@ -31,4 +31,4 @@ def export_onnx(pretrained):
 
 
 if __name__ == "__main__":
-    export_onnx(r'D:\Data\AIModel\LowLevel\SYENet\experiments\train_isp\models\model_best_slim.pkl')
+    export_onnx(r'/kaggle/working/syenet/experiments/2024-04-26 18-52-27 train_lle/models/model_pre.pkl')
