@@ -12,7 +12,7 @@ train:
   epoch: 10 #50
   lr: 1e-3
   num_workers: 0
-  save_every: 5 #10
+  save_every: 2 #10
   save_slim: true # re-parameterize the model and save the re-parameterized model
 
 test:
