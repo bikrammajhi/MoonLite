@@ -22,7 +22,7 @@ test:
   save: true
 
 demo:
-  demo_inp: /kaggle/input/lol-dataset/lol_dataset/our485/low # <path to the directory of raw input images for demonstration>
+  demo_inp: /kaggle/input/lol-dataset/lol_dataset/eval15/low  # <path to the directory of raw input images for demonstration>
   num_workers: 0
 
 model:
