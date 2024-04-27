@@ -10,8 +10,8 @@ datasets:
   train:
     name: DIV2K
     type: PairedImageDataset
-    dataroot_gt: /kaggle/input/my-div2k-dataset/DIV2K_train_HR
-    dataroot_lq: /kaggle/input/my-div2k-dataset/DIV2K_train_LR_bicubic/X4
+    dataroot_gt: /kaggle/input/div2k-dataset-for-super-resolution/Dataset/DIV2K_train_HR
+    dataroot_lq: /kaggle/input/div2k-dataset-for-super-resolution/Dataset/DIV2K_train_LR_bicubic/X2
     # (for lmdb)
     # dataroot_gt: datasets/DIV2K/DIV2K_train_HR_sub.lmdb
     # dataroot_lq: datasets/DIV2K/DIV2K_train_LR_bicubic_X2_sub.lmdb
