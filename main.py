@@ -65,13 +65,24 @@ def train(opt, logger):
 
         # Validation
         net.eval()
+        import torch.nn.functional as F
         for img_inp, img_gt, _ in tqdm(valid_loader, ncols=80):
             with torch.no_grad():
+                # Check if image sizes are the same along dimension 3, if not, adjust the size of img_gt
+                if img_inp.size(3) != img_gt.size(3):
+                    img_gt = F.interpolate(img_gt, size=(img_gt.size(2), img_inp.size(3)), mode='nearest')
+        
+                # Forward pass
                 out = net(img_inp)
+        
+                # Calculate MSE
                 mse = ((out - img_gt)**2).mean((2, 3))
                 psnr = (1 / mse).log10().mean() * 10
+        
             test_psnr.append(psnr.item())
-        mean_psnr = sum(test_psnr)/len(test_psnr)
+        
+        mean_psnr = sum(test_psnr) / len(test_psnr)
+
 
         if (epo+1) % int(opt.config['train']['save_every']) == 0:
             torch.save(net.state_dict(), r'{}/model_{}.pkl'.format(opt.save_model_dir, epo+1))
@@ -102,6 +113,9 @@ def test(opt, logger):
     for (img_inp, img_gt, img_name) in test_loader:
 
         with torch.no_grad():
+            # Check if image sizes are the same along dimension 3, if not, adjust the size of img_gt
+            if img_inp.size(3) != img_gt.size(3):
+                    img_gt = F.interpolate(img_gt, size=(img_gt.size(2), img_inp.size(3)), mode='nearest')
             out = net(img_inp)
             mse = ((out - img_gt)**2).mean((2, 3))
             psnr = (1 / mse).log10().mean() * 10
