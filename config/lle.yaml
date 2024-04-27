@@ -11,19 +11,19 @@ train:
   batch_size: 4
   epoch: 100 #50
   lr: 1e-3
-  num_workers: 3
+  num_workers: 0
   save_every: 10 
   save_slim: true # re-parameterize the model and save the re-parameterized model
 
 test:
   test_inp: /kaggle/input/lol_dataset/eval15/low # <path to the directory of raw input images for testing>
   test_gt: /kaggle/input/lol_dataset/eval15/high # <path to the directory of rgb ground truth images for testing>
-  num_workers: 3
+  num_workers: 0
   save: true
 
 demo:
   demo_inp: /kaggle/input/lol_dataset/eval15/low  # <path to the directory of raw input images for demonstration>
-  num_workers: 3
+  num_workers: 0
 
 model:
   type: original # [original, re-parameterized]: choose [original] model for training/inference or [re-parameterized] model for inference
