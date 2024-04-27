@@ -10,8 +10,8 @@ datasets:
   train:
     name: DIV2K
     type: PairedImageDataset
-    dataroot_gt: datasets/DIV2K/DIV2K_train_HR
-    dataroot_lq: datasets/DIV2K/DIV2K_train_LR_bicubic/X2
+    dataroot_gt: /kaggle/input/my-div2k-dataset/DIV2K_train_HR
+    dataroot_lq: /kaggle/input/my-div2k-dataset/DIV2K_train_LR_bicubic/X4
     # (for lmdb)
     # dataroot_gt: datasets/DIV2K/DIV2K_train_HR_sub.lmdb
     # dataroot_lq: datasets/DIV2K/DIV2K_train_LR_bicubic_X2_sub.lmdb
@@ -34,8 +34,8 @@ datasets:
   val:
     name: Set5
     type: PairedImageDataset
-    dataroot_gt: datasets/Set5/GTmod12
-    dataroot_lq: datasets/Set5/LRbicx2
+    dataroot_gt: /kaggle/input/set5-superresolution/Set5/GTmod12
+    dataroot_lq: /kaggle/input/set5-superresolution/Set5/LRbicx2
     io_backend:
       type: disk
 
