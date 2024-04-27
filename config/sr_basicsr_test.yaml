@@ -22,8 +22,8 @@ datasets:
   test_3:
     name: DIV2K100
     type: PairedImageDataset
-    dataroot_gt: /kaggle/input/my-div2k-dataset/DIV2K_valid_HR
-    dataroot_lq: /kaggle/input/my-div2k-dataset/DIV2K_valid_LR_bicubic/X4
+    dataroot_gt: /kaggle/input/div2k-dataset-for-super-resolution/Dataset/DIV2K_valid_HR
+    dataroot_lq: /kaggle/input/div2k-dataset-for-super-resolution/Dataset/DIV2K_valid_LR_bicubic/X2
     filename_tmpl: '{}x4'
     io_backend:
       type: disk
