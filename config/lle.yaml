@@ -28,6 +28,6 @@ demo:
 model:
   type: original # [original, re-parameterized]: choose [original] model for training/inference or [re-parameterized] model for inference
   pretrained: false # <path to the pretrained model>, not used if set false
-  need_slim: True #false # re-parameterize the original model
+  need_slim: false # re-parameterize the original model
   rep_scale: 4
   channels: 12
