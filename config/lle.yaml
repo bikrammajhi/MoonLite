@@ -27,7 +27,7 @@ demo:
 
 model:
   type: original # [original, re-parameterized]: choose [original] model for training/inference or [re-parameterized] model for inference
-  pretrained: /kaggle/working/model_best.pkl # <path to the pretrained model>, not used if set false
+  pretrained: /kaggle/input/lle/pytorch/100_epochs/1 #/kaggle/working/model_best.pkl # <path to the pretrained model>, not used if set false
   need_slim: false # re-parameterize the original model
   rep_scale: 4
   channels: 12
