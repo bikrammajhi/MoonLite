@@ -22,7 +22,7 @@ test:
   save: true
 
 demo:
-  demo_inp: /kaggle/input/exdark-dataset/Bicycle #/kaggle/input/lol_dataset/eval15/low  # <path to the directory of raw input images for demonstration>
+  demo_inp: /kaggle/input/exdark-dataset/Boat #/kaggle/input/lol_dataset/eval15/low  # <path to the directory of raw input images for demonstration>
   num_workers: 0
 
 model:
