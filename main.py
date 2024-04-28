@@ -2,30 +2,13 @@ import torch
 import numpy as np
 import cv2
 from tqdm import tqdm
-import torchvision.models as models
 
 from logger import Logger
 from option import get_option
 from data import import_loader
-from loss import import_loss, VGGPerceptualLoss
+from loss import import_loss
 from model import import_model
 
-# Load the pre-trained VGG model
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-vgg = models.vgg19(pretrained=True).features.eval().to(device).eval()
-
-
-# Define the layers for the VGG perceptual loss
-vgg_loss_layers = {
-    'conv1_2': vgg[:6],
-    'conv2_2': vgg[6:13],
-    'conv3_3': vgg[13:26],
-    'conv4_3': vgg[26:39]
-}
-
-# Instantiate the VGG perceptual loss function
-vgg_perceptual_loss_fn = VGGPerceptualLoss(vgg_loss_layers)
 
 def train(opt, logger):
     logger.info('task: {}, model task: {}'.format(opt.task, opt.model_task))
@@ -84,9 +67,8 @@ def train(opt, logger):
         net.eval()
         for img_inp, img_gt, _ in tqdm(valid_loader, ncols=80):
             with torch.no_grad():
-                out = net(img_inp.to(device))
-                # mse = ((out - img_gt)**2).mean((2, 3))
-                mse = vgg_perceptual_loss_fn(out, img_gt.to(device))
+                out = net(img_inp)
+                mse = ((out - img_gt)**2).mean((2, 3))
                 psnr = (1 / mse).log10().mean() * 10
             test_psnr.append(psnr.item())
         mean_psnr = sum(test_psnr)/len(test_psnr)
@@ -120,9 +102,8 @@ def test(opt, logger):
     for (img_inp, img_gt, img_name) in test_loader:
 
         with torch.no_grad():
-            out = net(img_inp.to(device))
-            # mse = ((out - img_gt)**2).mean((2, 3))
-            mse = vgg_perceptual_loss_fn(out, img_gt.to(device))
+            out = net(img_inp)
+            mse = ((out - img_gt)**2).mean((2, 3))
             psnr = (1 / mse).log10().mean() * 10
 
         if opt.config['test']['save']:
