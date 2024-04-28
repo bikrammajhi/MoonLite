@@ -9,6 +9,8 @@ from data import import_loader
 from loss import import_loss, VGGPerceptualLoss
 from model import import_model
 
+# Load the pre-trained VGG model
+vgg = models.vgg19(pretrained=True).features.eval()
 
 # Define the layers for the VGG perceptual loss
 vgg_loss_layers = {
