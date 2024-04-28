@@ -12,6 +12,14 @@ from model import import_model
 # Instantiate the VGG perceptual loss function
 vgg_perceptual_loss_fn = VGGPerceptualLoss(vgg_loss_layers)
 
+# Define the layers for the VGG perceptual loss
+vgg_loss_layers = {
+    'conv1_2': vgg[:6],
+    'conv2_2': vgg[6:13],
+    'conv3_3': vgg[13:26],
+    'conv4_3': vgg[26:39]
+}
+
 def train(opt, logger):
     logger.info('task: {}, model task: {}'.format(opt.task, opt.model_task))
 
