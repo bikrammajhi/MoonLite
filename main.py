@@ -6,9 +6,11 @@ from tqdm import tqdm
 from logger import Logger
 from option import get_option
 from data import import_loader
-from loss import import_loss
+from loss import import_loss, VGGPerceptualLoss
 from model import import_model
 
+# Instantiate the VGG perceptual loss function
+vgg_perceptual_loss_fn = VGGPerceptualLoss(vgg_loss_layers)
 
 def train(opt, logger):
     logger.info('task: {}, model task: {}'.format(opt.task, opt.model_task))
@@ -68,7 +70,8 @@ def train(opt, logger):
         for img_inp, img_gt, _ in tqdm(valid_loader, ncols=80):
             with torch.no_grad():
                 out = net(img_inp)
-                mse = ((out - img_gt)**2).mean((2, 3))
+                # mse = ((out - img_gt)**2).mean((2, 3))
+                mse = vgg_perceptual_loss_fn(out - img_gt)
                 psnr = (1 / mse).log10().mean() * 10
             test_psnr.append(psnr.item())
         mean_psnr = sum(test_psnr)/len(test_psnr)
@@ -103,7 +106,8 @@ def test(opt, logger):
 
         with torch.no_grad():
             out = net(img_inp)
-            mse = ((out - img_gt)**2).mean((2, 3))
+            # mse = ((out - img_gt)**2).mean((2, 3))
+            mse = vgg_perceptual_loss_fn(out - img_gt)
             psnr = (1 / mse).log10().mean() * 10
 
         if opt.config['test']['save']:
