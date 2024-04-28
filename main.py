@@ -11,7 +11,7 @@ from loss import import_loss, VGGPerceptualLoss
 from model import import_model
 
 # Load the pre-trained VGG model
-vgg = models.vgg19(pretrained=True).features.eval()
+vgg = models.vgg19(weights='imagenet').features.eval()
 
 # Define the layers for the VGG perceptual loss
 vgg_loss_layers = {
@@ -83,7 +83,7 @@ def train(opt, logger):
             with torch.no_grad():
                 out = net(img_inp)
                 # mse = ((out - img_gt)**2).mean((2, 3))
-                mse = vgg_perceptual_loss_fn(out - img_gt)
+                mse = vgg_perceptual_loss_fn(out, img_gt)
                 psnr = (1 / mse).log10().mean() * 10
             test_psnr.append(psnr.item())
         mean_psnr = sum(test_psnr)/len(test_psnr)
@@ -119,7 +119,7 @@ def test(opt, logger):
         with torch.no_grad():
             out = net(img_inp)
             # mse = ((out - img_gt)**2).mean((2, 3))
-            mse = vgg_perceptual_loss_fn(out - img_gt)
+            mse = vgg_perceptual_loss_fn(out, img_gt)
             psnr = (1 / mse).log10().mean() * 10
 
         if opt.config['test']['save']:
