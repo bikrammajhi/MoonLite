@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
-
+import torch.nn.functional as F
+import torchvision.models as models
 
 class CharbonnierLoss(nn.Module):
     def __init__(self, eps=1e-6):
@@ -92,3 +93,31 @@ def import_loss(training_task):
         return LossWarmup()
     else:
         raise ValueError('unknown training task, please choose from [isp, lle, sr, warmup].')
+
+
+
+# Load the pre-trained VGG model
+vgg = models.vgg19(pretrained=True).features.eval()
+
+# Define the layers for the VGG perceptual loss
+vgg_loss_layers = {
+    'conv1_2': vgg[:6],    # First convolutional layer
+    'conv2_2': vgg[6:13],  # Second convolutional layer
+    'conv3_3': vgg[13:26], # Third convolutional layer
+    'conv4_3': vgg[26:39]  # Fourth convolutional layer
+}
+
+# Custom perceptual loss function using VGG features
+class VGGPerceptualLoss(nn.Module):
+    def __init__(self, layers):
+        super(VGGPerceptualLoss, self).__init__()
+        self.layers = layers
+        self.criterion = nn.MSELoss()
+
+    def forward(self, x, y):
+        loss = 0.0
+        for layer_name, layer in self.layers.items():
+            x_feat = layer(x)
+            y_feat = layer(y)
+            loss += self.criterion(x_feat, y_feat)
+        return loss
