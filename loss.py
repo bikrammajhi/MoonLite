@@ -95,18 +95,6 @@ def import_loss(training_task):
         raise ValueError('unknown training task, please choose from [isp, lle, sr, warmup].')
 
 
-
-# Load the pre-trained VGG model
-vgg = models.vgg19(pretrained=True).features.eval()
-
-# Define the layers for the VGG perceptual loss
-vgg_loss_layers = {
-    'conv1_2': vgg[:6],    # First convolutional layer
-    'conv2_2': vgg[6:13],  # Second convolutional layer
-    'conv3_3': vgg[13:26], # Third convolutional layer
-    'conv4_3': vgg[26:39]  # Fourth convolutional layer
-}
-
 # Custom perceptual loss function using VGG features
 class VGGPerceptualLoss(nn.Module):
     def __init__(self, layers):
