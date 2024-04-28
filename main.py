@@ -2,6 +2,7 @@ import torch
 import numpy as np
 import cv2
 from tqdm import tqdm
+import torchvision.models as models
 
 from logger import Logger
 from option import get_option
