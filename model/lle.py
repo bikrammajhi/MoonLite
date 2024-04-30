@@ -1,4 +1,5 @@
 import torch.nn as nn
+import random
 from .utils import (
     ConvRep5,
     ConvRep3,
