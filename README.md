@@ -1,5 +1,5 @@
 # MoonKnight-Lite
-### Gradio Link: [Hugging Face][https://huggingface.co/spaces/KhadgaA/MoonKnight-Lite]
+### Gradio Link: [Hugging Face](https://huggingface.co/spaces/KhadgaA/MoonKnight-Lite)
 This repository contains the implementation of Computer Vision Major Project in Spring of 2024 at IIT-Jodhpur. This work is inspired by SYENet paper published in ICCV 2023. You can find the original paper here: 
 
 [SYENet: A Simple Yet Effective Network for Multiple Low-Level Vision Tasks with Real-Time Performance on Mobile Device](https://openaccess.thecvf.com/content/ICCV2023/papers/Gou_SYENet_A_Simple_Yet_Effective_Network_for_Multiple_Low-Level_Vision_ICCV_2023_paper.pdf)
