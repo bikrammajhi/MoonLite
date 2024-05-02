@@ -1,4 +1,4 @@
-# MoonKnight-Lite
+# MoonLite
 ### Gradio Link: [Hugging Face](https://huggingface.co/spaces/KhadgaA/MoonKnight-Lite)
 This repository contains the implementation of Computer Vision Major Project in Spring of 2024 at IIT-Jodhpur. This work is inspired by SYENet paper published in ICCV 2023. You can find the original paper here: 
 
